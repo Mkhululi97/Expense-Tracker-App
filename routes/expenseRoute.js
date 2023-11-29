@@ -1,7 +1,10 @@
 export default function (servicesFunc) {
   async function home(req, res) {
     try {
-      res.render("index", { categories: await servicesFunc.allCategories() });
+      res.render("index", {
+        categories: await servicesFunc.allCategories(),
+        categoryTotals: await servicesFunc.categoryTotals(),
+      });
     } catch (err) {
       console.log(err);
     }

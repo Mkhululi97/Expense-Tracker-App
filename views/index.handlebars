@@ -49,8 +49,18 @@
             {{/each }}
           </select>
         </form>
-      </div>
+        <h2>Expense summary per Category</h2>
+        <table>
+          <tr>Category</tr>
+          <tr>Totals</tr>
+          <tr{{#each categoryTotals}}>
+            <td>{{category_type}}</td>
+            <td>{{sum}}</td>
+          </tr> {{/each}}
+        </table>
       <a href="expense">View expenses</a>
+
+      </div>
     </main>
   </body>
 </html>
