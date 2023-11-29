@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title>Expense-Tracker</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h1 class="primary-heading">Expense💸 Tracker App📱</h1>
+        <h5 class="heading-h5">Add expense</h5>
+        <form action="/expense" method="POST">
+          <label for="desciption">Description</label>
+          <input
+            type="text"
+            placeholder="please enter your expense"
+            id="desciption"
+            name="expense-input"
+          />
+          <label for="Amount">Amount</label>
+          <input
+            type="number"
+            placeholder="please expense amount"
+            id="desciption"
+            name="expense-input"
+          />
+          <p class="category-text">Category</p>
+          <div class="category-grid-options">
+            <input type="radio" id="daily-expense" name="expense-radio" />
+            <label for="daily-expense">Daily</label>
+            <input type="radio" id="weekly-expense" name="expense-radio" />
+            <label for="weekly-expense">Weekly</label>
+            <input type="radio" id="weekday-expense" name="expense-radio" />
+            <label for="weekday-expense">Weekday</label>
+            <input type="radio" id="once-off-expense" name="expense-radio" />
+            <label for="once-off-expense">Once-off</label>
+            <input type="radio" id="monthly-expense" name="expense-radio" />
+            <label for="monthly-expense">Monthly</label>
+            <input type="radio" id="weekend-expense" name="expense-radio" />
+            <label for="weekend-expense">Weekend</label>
+          </div>
+          <button type="submit" class="btn-add">Add Expense</button>
+        </form>
+        <form action="/expense/{{category}}">
+          <select name="category-expense" id="dropdown-category">
+            <option value="">Please select Category</option>
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Weekday">Weekday</option>
+            <option value="Once-off">Once-off</option>
+            <option value="Montly">Montly</option>
+            <option value="Weekend">Weekend</option>
+          </select>
+        </form>
+      </div>
+      <a href="expense">View expenses</a>
+    </main>
+  </body>
+</html>
