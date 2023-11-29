@@ -20,10 +20,18 @@ export default function Expense(db) {
     await db.none("DELETE FROM expense.expense WHERE id=$1", [expenseid]);
     return allExpenses();
   }
+  async function categoryTotals() {
+    let totals = await db.any(`
+    SELECT SUM(e.amount), c.category_type FROM expense.category AS c RIGHT JOIN expense.expense AS e
+    ON c.id=e.category_id GROUP BY c.category_type ORDER BY sum DESC;
+    `);
+    return totals;
+  }
   return {
     addExpense,
     expenseForCategory,
     allExpenses,
     deleteExpense,
+    categoryTotals,
   };
 }
