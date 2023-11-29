@@ -46,6 +46,13 @@ describe("The Booking Salon", function () {
     let expenseFor = await expense.expenseForCategory(3);
     assert.equal(2, expenseFor.length);
   });
+  it("", async function () {
+    await expense.addExpense("Lunch", 1600.0, 3);
+    await expense.addExpense("Taxi", 1200.0, 3);
+    await expense.addExpense("Socials", 550.0, 4);
+    let result = await expense.allExpenses();
+    assert.equal(3, result.length);
+  });
   after(function () {
     db.$pool.end();
   });

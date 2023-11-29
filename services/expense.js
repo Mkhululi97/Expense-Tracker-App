@@ -13,8 +13,12 @@ export default function Expense(db) {
       categoryid,
     ]);
   }
+  async function allExpenses() {
+    return await db.any("SELECT * FROM expense.expense");
+  }
   return {
     addExpense,
     expenseForCategory,
+    allExpenses,
   };
 }
