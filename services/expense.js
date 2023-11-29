@@ -16,9 +16,14 @@ export default function Expense(db) {
   async function allExpenses() {
     return await db.any("SELECT * FROM expense.expense");
   }
+  async function deleteExpense(expenseid) {
+    await db.none("DELETE FROM expense.expense WHERE id=$1", [expenseid]);
+    return allExpenses();
+  }
   return {
     addExpense,
     expenseForCategory,
     allExpenses,
+    deleteExpense,
   };
 }

@@ -46,12 +46,19 @@ describe("The Booking Salon", function () {
     let expenseFor = await expense.expenseForCategory(3);
     assert.equal(2, expenseFor.length);
   });
-  it("", async function () {
+  it("should get all the expenses", async function () {
     await expense.addExpense("Lunch", 1600.0, 3);
     await expense.addExpense("Taxi", 1200.0, 3);
     await expense.addExpense("Socials", 550.0, 4);
     let result = await expense.allExpenses();
     assert.equal(3, result.length);
+  });
+  it("delete given expense", async function () {
+    await expense.addExpense("Lunch", 1600.0, 3);
+    await expense.addExpense("Taxi", 1200.0, 3);
+    await expense.addExpense("Socials", 550.0, 4);
+    let result = await expense.deleteExpense(2);
+    assert.equal(2, result.length);
   });
   after(function () {
     db.$pool.end();
