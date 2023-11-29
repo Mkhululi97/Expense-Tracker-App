@@ -24,16 +24,28 @@ describe("The Booking Salon", function () {
     let res = [
       {
         id: 1,
-        description: "monthly",
+        description: "Lunch",
         amount: "200",
         category_id: 2,
       },
     ];
 
-    let query = await expense.addExpense("monthly", 200, 2);
+    let query = await expense.addExpense("Lunch", 200.0, 2);
     assert.deepEqual(res, query);
   });
+  it("should filter expense by given category", async function () {
+    await expense.addExpense("Lunch", 1600.0, 3);
+    await expense.addExpense("Taxi", 1200.0, 3);
+    await expense.addExpense("Coffee", 200.0, 4);
+    await expense.addExpense("Brunch", 290.0, 5);
+    await expense.addExpense("Rent", 1600.0, 2);
+    await expense.addExpense("Toiletries", 459.0, 1);
+    await expense.addExpense("Socials", 550.0, 4);
+    await expense.addExpense("Visit friends", 240.0, 4);
 
+    let expenseFor = await expense.expenseForCategory(3);
+    assert.equal(2, expenseFor.length);
+  });
   after(function () {
     db.$pool.end();
   });
