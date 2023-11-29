@@ -80,7 +80,8 @@ describe("The Booking Salon", function () {
     let result = await expense.categoryTotals();
     assert.deepEqual(totals, result);
   });
-  after(function () {
+  after(async function () {
+    await db.none("TRUNCATE TABLE expense.expense RESTART IDENTITY CASCADE");
     db.$pool.end();
   });
 });

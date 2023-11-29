@@ -1,7 +1,11 @@
 export default function Expense(db) {
+  async function allCategories() {
+    return await db.manyOrNone("SELECT * FROM expense.category");
+  }
   async function addExpense(description, amount, catergoryid) {
+    // console.log(description, amount, catergoryid);
     if (catergoryid && amount && description) {
-      await db.any(
+      await db.none(
         "INSERT INTO expense.expense (description, amount, category_id) VALUES($1,$2,$3)",
         [description, amount, catergoryid]
       );
@@ -33,5 +37,6 @@ export default function Expense(db) {
     allExpenses,
     deleteExpense,
     categoryTotals,
+    allCategories,
   };
 }

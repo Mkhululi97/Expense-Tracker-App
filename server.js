@@ -10,13 +10,32 @@ import flash from "express-flash";
 import session from "express-session";
 /* ##### BRING IN SERVICES FUNCTION ##### */
 import Expense from "./services/expense.js";
+/* ##### BRING IN ROUTES FUNCTION ##### */
 import routes from "./routes/expenseRoute.js";
+/* ##### BRING IN PG PROMISE ##### */
+import pgPromise from "pg-promise";
+/* ##### BRING IN DOTENV ##### */
+import dotenv from "dotenv";
+
+/* -------------------- SETUP DATABASE -------------------- */
+dotenv.config();
+const DATABASE_URL =
+  process.env.DATABASE_URL || "postgresql://localhost:5432/expense_tracker";
+
+const config = {
+  connectionString: DATABASE_URL,
+};
+
+const pgp = pgPromise();
+const db = pgp(config);
+/* -------------------- SETUP DATABASE -------------------- */
+
 /* -------------------- ALL INSTANCES -------------------- */
 
 /* INITIALIZE EXPRESS */
 const app = express();
 /* INITIALIZE FACTORY FUNCTION */
-const expenseServices = Expense();
+const expenseServices = Expense(db);
 /* INITIALIZE ROUTES FUNCTION */
 const expenseRoute = routes(expenseServices);
 
@@ -49,6 +68,8 @@ app.use(
 app.use(flash());
 /* -------------------- ALL ROUTES -------------------- */
 app.get("/", expenseRoute.home);
+app.post("/addexpense", expenseRoute.addExpense);
+app.post("/expense/:category", expenseRoute.expenseForCategory);
 app.get("/expense", expenseRoute.expense);
 /* -------------------- ALL ROUTES -------------------- */
 

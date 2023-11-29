@@ -6,28 +6,27 @@
     <title>Expense-Tracker</title>
   </head>
   <body>
-    <div class="container">
-
-      <h4 class="heading-h4">All expenses</h4>
-      <table>
-
-        <tr>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Totals</th>
-        </tr>
-        <form action="/delete/{{expenseid}}" method="POST">
+      <form action="/delete/{{expenseid}}" method="POST">
+      <div class="container">
+        <h4 class="heading-h4">All expenses</h4>
+        <table>
 
           <tr>
-            <td>Lunch</td>
-            <td>Weekday</td>
-            <td>1600.00</td>
-            <td><button type="submit">Delete</button></td>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Totals</th>
           </tr>
 
-        </form>
-      </table>
-    </div>
+            <tr {{#each expenses}} >
+              <td>{{description}}</td>
+              <td>{{category_id}}</td>
+              <td>{{amount}}</td>
+              <td><button type="submit">Delete</button></td>
+            </tr {{/each}}>
+
+        </table>
+      </div>
+    </form>
     <a href="/">Back to home</a>
   </body>
 </html>
